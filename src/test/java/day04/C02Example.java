@@ -26,7 +26,8 @@ public class C02Example {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         driver.get("http://the-internet.herokuapp.com/add_remove_elements/");
-        createButtons(20);
+        createButtons(100);
+        DeleteButtonsAndValidate(95);
 
     }
 
@@ -37,9 +38,9 @@ public class C02Example {
         }
     }
 
-    public void deleteButtonsAndValidate(int numberOfButtonsToDelete) {
-        for (int i = 0; i < numberOfButtonsToDelete; i++) {
-            WebElement deleteButton = driver.findElement(By.xpath("//*[.='Delete']"));
+    public void DeleteButtonsAndValidate(int numberOfDelete) {
+        for (int i = 0; i < numberOfDelete; i++) {
+            WebElement deleteButton = driver.findElement(By.xpath("//button[@onclick='deleteElement()']"));
             deleteButton.click();
         }
     }
