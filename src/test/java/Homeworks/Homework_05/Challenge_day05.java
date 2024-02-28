@@ -46,9 +46,10 @@ public class Challenge_day05 {
         Thread.sleep(2000);
 
         //Remove the TODO that you've added
-        WebElement delTask = driver.findElement(By.xpath("//li[contains(text(), 'task1')]//i[@class='fa fa-trash']"));
+        WebElement delTask = driver.findElement(By.xpath("//li[contains(text(), '"+toDoText+"')]//i[@class='fa fa-trash']"));
         delTask.click();
 
+        Thread.sleep(2000);
         // Assert TODO has been removed from the list
         List<WebElement> toDoList = driver.findElements(By.xpath("//ul/li"));
         boolean result = true;

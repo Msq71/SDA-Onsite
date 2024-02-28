@@ -1,4 +1,4 @@
-package day04;
+package Homeworks.Homework_04;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-public class Challenge {
+public class Challenge_day04 {
     static WebDriver driver;
 
     @BeforeClass
