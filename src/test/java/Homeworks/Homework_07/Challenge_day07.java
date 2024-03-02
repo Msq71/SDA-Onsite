@@ -17,6 +17,12 @@ click on "Click me, to Open an alert after 5 seconds" button
 click on accept alert
 click on "Change Text to Selenium Webdriver"
 verify "Selenium Webdriver" message is displayed
+click on "Display button after 10 seconds" button
+verify the button is displayed
+click on "Enable button after 10 seconds" button
+verify the button is enabled
+click on "Check Checkbox after 10 seconds" button
+verify the check box is checked
      */
 
     static WebDriver driver;
