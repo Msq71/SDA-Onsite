@@ -12,6 +12,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Iterator;
+import java.util.Set;
 
 public class Task2 {
     /*
@@ -35,7 +37,7 @@ Go back to the previous window and then verify the title: “The Internet”
     public void test() throws InterruptedException {
         //Go to URL: https://the-internet.herokuapp.com/windows
         driver.get("https://the-internet.herokuapp.com/windows");
-        String handle1 = driver.getWindowHandle();
+       // String handle1 = driver.getWindowHandle();
 
         //Verify the text: “Opening a new window”
         WebElement text = driver.findElement(By.xpath("//h3[.='Opening a new window']"));
@@ -43,7 +45,8 @@ Go back to the previous window and then verify the title: “The Internet”
 
         //Verify the title of the page is “The Internet”
        String title = driver.getTitle();
-       Assert.assertEquals("The Internet",title);
+        System.out.println("title = " + title);
+        Assert.assertEquals("The Internet",title);
 
        //Click on the “Click Here” button
         WebElement clickButton = driver.findElement(By.xpath("//a[@href='/windows/new']"));
@@ -53,13 +56,26 @@ Go back to the previous window and then verify the title: “The Internet”
         // Wait for the new window to be available
         WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         wait.until(ExpectedConditions.numberOfWindowsToBe(2));
-        String handle2 = driver.getWindowHandle();
-        driver.switchTo().window(handle2);
+
+        //Using Set and Iterator to store and retrieve tabs handles.
+        Set<String> handles = driver.getWindowHandles();
+        System.out.println("windowHandles = " + handles);
+        Iterator<String> itr = handles.iterator();
+
+        //Getting and storing all handles:
+        String handle1 = itr.next();
+        System.out.println("handle1 = " + handle1);
+        String handle2 = itr.next();
+
         //Verify the new window title is “New Window”
+        Thread.sleep(1000);
+        driver.switchTo().window(handle2);
         String title2 = driver.getTitle();
+        System.out.println("title2 = " + title2);
         Assert.assertEquals("New Window",title2);
 
         //Go back to the previous window and then verify the title: “The Internet”
+        Thread.sleep(1000);
         driver.switchTo().window(handle1);
         System.out.println("driver.getTitle() = " + driver.getTitle());
         Assert.assertEquals("The Internet",title);

@@ -4,7 +4,9 @@ import Utilities.TestBase;
 import com.sun.jdi.Value;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
@@ -63,16 +65,12 @@ public class Challenge_day08 extends TestBase {
         WebElement disabledField = driver.findElement(By.xpath("//input[@id='SingleLine-arialabel']"));
 
         //Verify that we cannot send keys to the disabled Field
-        try {
+        Assert.assertThrows(ElementNotInteractableException.class, () -> {
             disabledField.sendKeys("Hello");
+        });
+
             // If we reach this point, it means no exception was thrown, which is unexpected
-            assert false : "Expected an exception when sending keys to a disabled field";
-        } catch (org.openqa.selenium.InvalidElementStateException e) {
-            // Catch the exception that occurs when trying to interact with a disabled element
-            System.out.println("Caught the expected exception: " + e.getMessage());
-            // Assert that the exception is caught as expected
-            assert true : "Caught the expected exception when sending keys to a disabled field";
-        }
+
 
         //Select a rating stars:
         List<WebElement> rating = driver.findElements(By.xpath("//a[@role='radio']"));
